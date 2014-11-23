@@ -1,15 +1,15 @@
-import textInterface
+import text_interface as interface
 import puzzle
 import sys
 import os
 
 def run():
-	textInterface.welcomeWorld()
-	textInterface.about()
-	userName = textInterface.getName()
-	lvl = textInterface.beginAdventure()
+	interface.welcomeWorld()
+	interface.about()
+	userName = interface.getName()
+	lvl = interface.beginAdventure()
 	#puzzle.play_level(lvl)
-	textInterface.completedTasks()
+	interface.completedTasks()
 
 def main():
 	run()

@@ -43,6 +43,16 @@ def drawMap():
 	print textMap
 	print currentLocation
 
+def put_text(string):
+	print string
+
+def get_text(p=''):
+	userInput = None
+	while True:
+		userInput = raw_input(p)
+		if userInput:
+			return userInput
+		put_text('No input read. Try again:')
 
 def beginAdventure():
 	print "Hello " + userName + "! I am your assistant, Sam Ifor. There is a lot of work to be done. Today, there are some problems that need to be fixed! Let us get to it shall we?\n"
