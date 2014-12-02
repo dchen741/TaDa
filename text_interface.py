@@ -86,8 +86,9 @@ def beginAdventure():
 			os.system('clear')
 			puzzle = getPuzzle()
 			puzzle.start_puzzle()
+			global userLocation
 			userLocation = userLocation + 1
-			if userLocation >= numTasks:
+			if userLocation >= (numTasks-1):
 				break
 		elif userInput == '-quit':
 			break

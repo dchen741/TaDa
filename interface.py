@@ -7,8 +7,7 @@ def run():
 	interface.welcomeWorld()
 	interface.about()
 	userName = interface.getName()
-	lvl = interface.beginAdventure()
-	#puzzle.play_level(lvl)
+	level = interface.beginAdventure()
 	interface.completedTasks()
 
 def main():
