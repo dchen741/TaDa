@@ -1,6 +1,7 @@
 import os
 import sys
 import test_puzzle
+import rendez_vous
 import random
 
 userName = "Anonymous"
@@ -94,11 +95,11 @@ def beginAdventure():
 			print "That is not a valid command. Please choose a command that is listed in -help\n"
 
 def initializePuzzles():
-	puzzles.append(test_puzzle.p)
+	puzzles.append(rendez_vous.p)
+	#puzzles.append(test_puzzle.p)
 	print puzzles
 
 def getPuzzle():
-	print len(puzzles)
 	randomPuzzle = random.randrange(0,len(puzzles))
 	return puzzles.pop(randomPuzzle)
 
