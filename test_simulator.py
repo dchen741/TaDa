@@ -4,11 +4,11 @@ import simulator
 def main():
   str1 = """for x in xrange(100):
               import time
-              time.sleep(0.1)
+              time.sleep(0.01)
               controller.update_state(thread_id, x)"""
   str2 = [ 'for x in xrange(100):'
          , '     import time'
-         , '     time.sleep(0.1)'
+         , '     time.sleep(0.01)'
          , '     controller.update_state(thread_id, x)']
   code = [str1, '\n'.join(str2)]
   threads = map(mk_thread, code)
@@ -18,7 +18,7 @@ def main():
       print 'DONE!'
       return True, None
     else:
-      if states[0] != states[1]:
+      if states[0] and states[1] and states[0] != states[1]:
         print 'State 0: %i, State 1: %i' % (states[0], states[1])
       return False, None
 

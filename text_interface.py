@@ -142,3 +142,10 @@ def help():
 	print "-viewDictionary: Shows a list of vocabulary and provides definitions for them"
 	print "-next: Proceeds to the next available puzzle"
 	print ""
+
+def print_code(code, message=None):
+	os.system('clear')
+	if message:
+		print message
+	for i, line in enumerate(code.split('\n')):
+		print '%s %s' % (str(i).ljust(2), line)

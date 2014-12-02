@@ -18,15 +18,19 @@ class Simulator:
 
   def spin_threads(self):
     id_n = 0
+    threads = []
     for target in self.threads:
       t = threading.Thread(target=target, args =(self, id_n))
       t.daemon = True
-      t.start()
+      threads.append(t)
       id_n += 1
+    map(lambda t: t.start(), threads)
 
   def poll_loop(self):
     while True:
+      self.mutex.acquire()
       success, messgae = self.predicate(self.states)
+      self.mutex.release()
       if success:
         return messgae
       time.sleep(self.poll_rate)
