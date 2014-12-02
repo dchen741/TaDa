@@ -1,10 +1,13 @@
 import os
 import sys
+import test_puzzle
+import random
 
 userName = "Anonymous"
 userMap = []
 userLocation = 0
 tasksCompleted = False
+puzzles = []
 
 def welcomeWorld():
 	os.system('clear')
@@ -62,6 +65,7 @@ def get_text(p=''):
 
 def beginAdventure():
 	library = open('vocabLibrary.txt', 'r')
+	initializePuzzles()
 	print "Hello " + userName + "! I am your assistant, Sam Ifor. There is a lot of work to be done. Today, there are some problems that need to be fixed! Let us get to it shall we?\n"
 	numTasks = raw_input("How many tasks would you like to fix today (1-3)? ")
 	global userMap
@@ -77,10 +81,26 @@ def beginAdventure():
 			drawMap()
 		elif userInput == '-viewDictionary':
 			showDictionary(library)
+		elif userInput == '-next':
+			os.system('clear')
+			puzzle = getPuzzle()
+			puzzle.start_puzzle()
+			userLocation = userLocation + 1
+			if userLocation >= numTasks:
+				break
 		elif userInput == '-quit':
 			break
 		else:
 			print "That is not a valid command. Please choose a command that is listed in -help\n"
+
+def initializePuzzles():
+	puzzles.append(test_puzzle.p)
+	print puzzles
+
+def getPuzzle():
+	print len(puzzles)
+	randomPuzzle = random.randrange(0,len(puzzles))
+	return puzzles.pop(randomPuzzle)
 
 def completedTasks():
 	os.system('clear')
@@ -120,4 +140,5 @@ def help():
 	print "-help: Brings up the list of possible commands"
 	print "-viewMap: Shows a map of your current progress"
 	print "-viewDictionary: Shows a list of vocabulary and provides definitions for them"
+	print "-next: Proceeds to the next available puzzle"
 	print ""
