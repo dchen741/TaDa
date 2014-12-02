@@ -30,7 +30,7 @@ class Puzzle:
           interface.put_text("Congratulations! That's correct. Good job!\n")
           break
         else:
-          interface.put_text("Woops! That's incorrect. Try again!\n")
+          interface.get_text("Woops! That's incorrect. Try again? (y/n)\n")
       self.solved = True
       return self.id
 

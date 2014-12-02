@@ -1,0 +1,15 @@
+Why would you want concurrency?: Concurrency allows for the computer system to respond quickly! Even if a thread is in the middle of a computation, another thread can respond instead. It also makes the most of hardware resources so that it is the most productive and speedier.
+Concurrency: Activities may take place in an unconstrained order. They appear to happen at the same time.
+Concurrent: Run together, when more than one thing happens at a time.
+Parallelism: Activities actually DO take place at the same time. Note that activities can be concurrent without being active in parallel.
+Atomicity: "Indivisible". When something can be viewed as one unit. For example, an atomic operation is unaffected by changes of state.
+Critical Regions: These are regions of code within a task that need to be synchronized with other tasks. For example, you would want a critical region if you want to have a shared resource used among different threads.
+Locks/Mutexes: These will "lock" a particular part of code, usually a variable, and only allows one thread to access it at a time. They are used to provide mutual exclusion (hence mutex).
+Semaphores: A semaphore is a variable that is used to limit the number of processes accessing a common resource. For example, a rollercoaster has a limited amount of seats in the ride and it would be dangerous for the capacity to be exceeded.
+Condition Variables: A condition variable is the process where a thread can wait or sleep until some condition arises. Then a signal can be sent to waiting threads to tell them to proceed.
+Monitors: A monitor is an automatic mechanism for associating a lock with a data abstraction and ensuring that all operations acquire and release the lock. For example, you can use it to wake all waiting/sleeping threads.
+Erlang: Erlang is a concurrent programming language that is semi-functional. 
+Fork: Fork creates a new process that is an exact copy of the current process.
+Thread: A thread is the smallest sequence of programmed instructions that can be managed independently. It is a single flow of control with a process. Threads are a way for a program to divide itself into two or more simultaneous tasks.
+Deadlock: When two or more competing actions are waiting for each other to finish, but this means neither process ever completes.
+Race-Condition: A race condition occurs when two or more threads can access shared data and try to change it at the same time. However, you do not know which thread will attempt to access the data. TLDR-Threads are "racing" to access the shared data.
