@@ -1,10 +1,13 @@
 import os
+import sys
 
 userName = "Anonymous"
 userMap = []
 userLocation = 0
+tasksCompleted = False
 
 def welcomeWorld():
+	os.system('clear')
 	print "\n"
 	print "************************************************************"
 	print "**********                                        **********"
@@ -28,20 +31,23 @@ def getName():
 
 def drawMap():
 	print "Here is your current progress today! The 'x' marks your current location"
-	currentLocation = ""
+	currentLocation = []
 	textMap = ""
 	textMap += "Start ----- "
-	currentLocation += "_____ ----- "
+	currentLocation.append("_____ ----- ")
 	for i in range(len(userMap)):
 		if userMap[i] == 0:
 			textMap += "???? ----- "
-			currentLocation += "____ ----- "
+			currentLocation.append("____ ----- ")
 		else:
-			currentLocation += "____ ----- "
+			currentLocation.append("____ ----- ")
 			textMap += "DONE ----- "
 	textMap += "Finished!\n"
+	currentLocation[userLocation] = "__X__ ----- "
 	print textMap
-	print currentLocation
+	for text in currentLocation:
+		sys.stdout.write(text)
+	print
 
 def put_text(string):
 	print string
@@ -55,6 +61,7 @@ def get_text(p=''):
 		put_text('No input read. Try again:')
 
 def beginAdventure():
+	library = open('vocabLibrary.txt', 'r')
 	print "Hello " + userName + "! I am your assistant, Sam Ifor. There is a lot of work to be done. Today, there are some problems that need to be fixed! Let us get to it shall we?\n"
 	numTasks = raw_input("How many tasks would you like to fix today (1-3)? ")
 	global userMap
@@ -68,6 +75,8 @@ def beginAdventure():
 			help()
 		elif userInput == '-viewMap':
 			drawMap()
+		elif userInput == '-viewDictionary':
+			showDictionary(library)
 		elif userInput == '-quit':
 			break
 		else:
@@ -75,9 +84,40 @@ def beginAdventure():
 
 def completedTasks():
 	os.system('clear')
-	print "Great job! You have solved everything and the park is fully functional!"
+	if tasksCompleted == False:
+		print "Thanks for playing! Try to finish next time :p"
+	else:
+		print "Great job! You have solved everything and you are one step closer to learning concurrent programming!"
+
+def showDictionary(library):
+	dictArray = []
+	dictionary = {}
+	for line in library:
+		splitLine = line.rstrip('\n').split(':')
+		dictArray.append(splitLine[0])
+		dictionary[splitLine[0]] = splitLine[1]
+	while(True):
+		os.system('clear')
+		counter = 0
+		for item in dictArray:
+			print str(counter) + ". " + item
+			counter = counter + 1
+		userInput = raw_input("Welcome to the concurrency library. Please type the number associated with the word you would like to learn about. (-1 to return)\n")
+		if userInput == "-1":
+			os.system('clear')
+			break
+		elif isinstance(int(userInput), int) and int(userInput) < len(dictionary.keys()):
+			os.system('clear')
+			tempWord = dictArray[int(userInput)]
+			print tempWord + "\n"
+			print "Definition:" + dictionary[tempWord]
+			print "\n"
+			raw_input('Enter to continue')
+		else:
+			print "That is not a valid option. Please enter a number or -1 to quit"
 
 def help():
 	print "-help: Brings up the list of possible commands"
 	print "-viewMap: Shows a map of your current progress"
+	print "-viewDictionary: Shows a list of vocabulary and provides definitions for them"
 	print ""
