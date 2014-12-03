@@ -1,15 +1,14 @@
-import puzzle
+from puzzle import Puzzle
 
-p = puzzle.Puzzle("Rendez-vous",
-                "In this puzzle, we must ensure that both threads execute their first statement before either's second is run.",
-                ['  a1done.signal()', '  a1done.wait()', '  b1done.signal()', '  b1done.wait()'],
-                "Thread A:\n  statement a1\n  statement a2\n\nThread B:\n  statement b1\n  statement b2",
-                "Thread A:\n  statement a1\n  a1done.signal()\n  b1done.wait()\n  statement a2\n\nThread B:\n  statement b1\n  b1done.signal()\n  a1done.wait()\n  statement b2",
+rendez_vous_p = Puzzle("Rendez-vous",
+                "Alice and Bob are going to the amusement park. They intend to meet at the gate and enter together. You can use 'alice.signal()' to signal alice's arrival, and 'alice.wait()' to wait until alice has signaled her arrival. The same is true for 'bob.signal()' and 'bob.wait()'. Add these lines to the given code to ensure neither will enter the park without the other.",
+                ['  alice.signal()', '  alice.wait()', '  bob.signal()', '  bob.wait()'],
+                "Thread Alice:\n  Alice arrives\n  Alice enters the park\n\nThread Bob:\n  Bob arrives\n  Bob enters the park",
+                "Thread Alice:\n  Alice arrives\n  alice.signal()\n  bob.wait()\n  Alice enters the park\n\nThread Bob:\n  Bob arrives\n  bob.signal()\n  alice.wait()\n  Bob enters the park",
                 )
 
 def main():
-  # def __init__(self, title, lesson, lines, code, answer):
-  p.start_puzzle()
+  rendez_vous_p.start_puzzle()
 
 if __name__ == '__main__':
   main()

@@ -1,4 +1,4 @@
-import text_interface as interface
+from interface_io import *
 
 import os
 
@@ -15,22 +15,24 @@ class Puzzle:
 
   def start_puzzle(self):
     while(not self.solved):
-      interface.put_text(self.lesson)
-      interface.get_text('Ready for the puzzle? (y/n)\n')
       while(True):
         response_code = self.code
         for i, l in enumerate(self.lines):
-          interface.print_code(response_code, "The code currently is:")
-          resp = int(interface.get_text('Place the line \'%s\': ' % l))
+          clear()
+          put_text(self.lesson)
+          print_code(response_code, "\nThe code currently is:")
+          resp = int(get_text('Place the line \'%s\': ' % l))
           response_code = self.process_input(resp, l, response_code)
 
-        interface.print_code(response_code, "The code currently is:")
+        clear()
+        put_text(self.lesson)
+        print_code(response_code, "\nThe code currently is:")
 
         if(response_code == self.answer):
-          interface.put_text("Congratulations! That's correct. Good job!\n")
+          put_text("Congratulations! That's correct. Good job!\n")
           break
         else:
-          interface.get_text("Woops! That's incorrect. Try again? (y/n)\n")
+          get_text("Woops! That's incorrect. Try again? (y/n)\n")
       self.solved = True
       return self.id
 

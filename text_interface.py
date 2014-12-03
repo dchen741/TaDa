@@ -1,7 +1,8 @@
 import os
 import sys
-import test_puzzle
-import rendez_vous
+from test_puzzle import test_puzzle_p
+from rendez_vous import rendez_vous_p
+from interface_io import *
 import random
 
 userName = "Anonymous"
@@ -53,17 +54,6 @@ def drawMap():
 		sys.stdout.write(text)
 	print
 
-def put_text(string):
-	print string
-
-def get_text(p=''):
-	userInput = None
-	while True:
-		userInput = raw_input(p)
-		if userInput:
-			return userInput
-		put_text('No input read. Try again:')
-
 def beginAdventure():
 	library = open('vocabLibrary.txt', 'r')
 	initializePuzzles()
@@ -88,7 +78,7 @@ def beginAdventure():
 			puzzle.start_puzzle()
 			global userLocation
 			userLocation = userLocation + 1
-			if userLocation >= (numTasks-1):
+			if userLocation > (int(numTasks)-1):
 				break
 		elif userInput == '-quit':
 			break
@@ -96,8 +86,8 @@ def beginAdventure():
 			print "That is not a valid command. Please choose a command that is listed in -help\n"
 
 def initializePuzzles():
-	puzzles.append(rendez_vous.p)
-	#puzzles.append(test_puzzle.p)
+	puzzles.append(rendez_vous_p)
+	puzzles.append(test_puzzle_p)
 	print puzzles
 
 def getPuzzle():
@@ -106,10 +96,10 @@ def getPuzzle():
 
 def completedTasks():
 	os.system('clear')
-	if tasksCompleted == False:
-		print "Thanks for playing! Try to finish next time :p"
-	else:
-		print "Great job! You have solved everything and you are one step closer to learning concurrent programming!"
+	# if tasksCompleted == False:
+		# print "Thanks for playing! Try to finish next time :p"
+	# else:
+	print "Great job! You have solved everything and you are one step closer to learning concurrent programming!"
 
 def showDictionary(library):
 	dictArray = []
@@ -144,10 +134,3 @@ def help():
 	print "-viewDictionary: Shows a list of vocabulary and provides definitions for them"
 	print "-next: Proceeds to the next available puzzle"
 	print ""
-
-def print_code(code, message=None):
-	os.system('clear')
-	if message:
-		print message
-	for i, line in enumerate(code.split('\n')):
-		print '%s %s' % (str(i).ljust(2), line)
