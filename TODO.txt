@@ -1,0 +1,11 @@
+Minimum Deliverables
+- ANDREW: finish puzzle module
+- write three text puzzles
+- build simulator module
+- ALI: team presentation
+- ALI: written project final report
+
+Maximum Deliverables
+- look into tKinter for GUI
+- built GUI module
+- extended simulator module to display erroneous solutions

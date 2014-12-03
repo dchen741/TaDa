@@ -87,7 +87,7 @@ def beginAdventure():
 
 def initializePuzzles():
 	puzzles.append(rendez_vous_p)
-	puzzles.append(test_puzzle_p)
+	#puzzles.append(test_puzzle_p)
 	print puzzles
 
 def getPuzzle():
