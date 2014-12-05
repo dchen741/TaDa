@@ -10,7 +10,6 @@ rendez_vous_p = Puzzle("Rendez-vous",
 
 def main():
   rendez_vous_p.start_puzzle()
-  #rendez_vous_p.run_code("one", "two")
 
 if __name__ == '__main__':
   main()
