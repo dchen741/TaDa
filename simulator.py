@@ -1,5 +1,9 @@
 import threading
 import time
+import os
+import sys
+import puzzle
+import simulator
 
 class Simulator:
   def __init__(self, threads, predicate, poll_rate=0.01, clean_fun=None):
@@ -9,6 +13,7 @@ class Simulator:
     self.mutex     = threading.Lock()
     self.poll_rate = poll_rate 
     self.clean_fun = clean_fun
+    self.statesList = []
 
   def run_sim(self):
     threads = self.spin_threads()
@@ -43,3 +48,26 @@ class Simulator:
   def cleanup(self, threads):
     if self.clean_fun:
       self.clean_fun()
+
+  def add_state(self, state):
+    self.statesList.append(state)
+
+  def visualize(self):
+    i=0
+    movement = "n"
+    while movement != "-next":
+      os.system('clear')
+      #print "NUM STATES IS " + str(len(statesList))
+      states = self.statesList[i]
+      print "Frame: " + str(i)
+      for x in range(len(states)):
+          print "State " + str(x) + ": " + str(states[x])
+      movement = raw_input("\nHit Enter to go to the next snapshot.\nType p + Enter to go the the last snapshot. \nTo move on, type -next.\n")
+      if movement == "":
+        i = i + 1
+        if i >= len(self.statesList):
+          i = len(self.statesList)-1
+      elif movement == "p":
+        i = i - 1
+        if i < 0:
+          i = 0
