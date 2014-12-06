@@ -1,18 +1,16 @@
 import threading
 import time
 import os
-import sys
-import puzzle
-import simulator
 
 class Simulator:
-  def __init__(self, threads, predicate, poll_rate=0.01, clean_fun=None):
-    self.threads   = threads
-    self.predicate = predicate
-    self.states    = [None for _ in threads]
-    self.mutex     = threading.Lock()
-    self.poll_rate = poll_rate 
-    self.clean_fun = clean_fun
+  def __init__(self, threads, predicate, semaphores = [], poll_rate=0.01, clean_fun=None):
+    self.threads    = threads
+    self.predicate  = predicate
+    self.semaphores = semaphores
+    self.states     = [None for _ in threads]
+    self.mutex      = threading.Lock()
+    self.poll_rate  = poll_rate 
+    self.clean_fun  = clean_fun
     self.statesList = []
 
   def run_sim(self):
@@ -34,10 +32,12 @@ class Simulator:
   def poll_loop(self):
     while True:
       self.mutex.acquire()
-      success, messgae = self.predicate(self.states)
+      success, failure, message = self.predicate(self.states)
       self.mutex.release()
       if success:
-        return messgae
+        return True, message
+      if failure:
+        return False, message
       time.sleep(self.poll_rate)
 
   def update_state(self, thread_id, state):
@@ -57,7 +57,6 @@ class Simulator:
     movement = "n"
     while movement != "-next":
       os.system('clear')
-      #print "NUM STATES IS " + str(len(statesList))
       states = self.statesList[i]
       print "Frame: " + str(i)
       for x in range(len(states)):
