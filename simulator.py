@@ -43,6 +43,7 @@ class Simulator:
   def update_state(self, thread_id, state):
     self.mutex.acquire()
     self.states[thread_id] = state
+    self.add_state(self.states)
     self.mutex.release()
 
   def cleanup(self, threads):

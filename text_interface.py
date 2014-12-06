@@ -1,6 +1,6 @@
 import os
 import sys
-from test_puzzle import test_puzzle_p
+#from test_puzzle import test_puzzle_p
 from rendez_vous import rendez_vous_p
 from interface_io import *
 import random

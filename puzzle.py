@@ -30,7 +30,7 @@ class Puzzle:
         threads = self.translator(response_code)
         simulator = Simulator(threads, self.predicate, self.semaphores, self.poll_rate)
         success, message = simulator.run_sim()
-        # simulator.visualize()
+        simulator.visualize()
         if success:
           put_text('Simulator test Passed!')
         else:  
